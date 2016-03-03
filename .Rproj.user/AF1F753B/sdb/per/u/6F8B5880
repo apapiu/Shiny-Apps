@@ -1,0 +1,18 @@
+{
+    "contents" : "\ninstall.packages(\"manipulate\")\nlibrary(manipulate)\n\n# slider\nmanipulate(\n    plot(rnorm(x), rnorm(x)),\n    x=slider(0, 1000, initial=1, step=100)\n)",
+    "created" : 1456036446439.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "3482280207",
+    "id" : "6F8B5880",
+    "lastKnownWriteTime" : 4319936518,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled3"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
