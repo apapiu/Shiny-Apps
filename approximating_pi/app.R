@@ -51,7 +51,8 @@ server <- function(input, output) {
         
         ggplotly(qplot(y[,1], y[,2], color = inside, xlab = "x", ylab = "y") +
             scale_colour_manual(values=c("#9999CC", "#66CC99")) + 
-                                    theme(legend.position="none"))
+            theme_minimal() +
+            theme(legend.position="none")  )
     })
     
     output$plotly <- renderPlotly({
