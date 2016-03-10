@@ -1,8 +1,11 @@
+library(shiny)
+library(shinythemes)
+library(ggplot2)
+
 
 ui <- fluidPage( theme = shinytheme("flatly"),
         
-     fluidRow(column(" ", width = 12)),
-                 
+
      fluidRow( column (verticalLayout( 
          
                             wellPanel("We will aproximate Pi by generating random points
@@ -11,17 +14,20 @@ ui <- fluidPage( theme = shinytheme("flatly"),
                             You can think of this as randomly throwing darts at a square board.
                             Since we know what the area of a square is we've 
                             replaced a calculus problem with a counting problem! Play around with the slider on the
-                            right - you should get a beter approximation of Pi the more points you use."),
+                            right - you should get a better approximation of Pi the more points you use."),
                                 
-                          wellPanel(sliderInput(inputId = "num",
+                            wellPanel(sliderInput(inputId = "num",
                                 label = "Number of Points",
-                                value = 30, min = 10, max = 30000)),
+                                value = 1000, min = 10, max = 30000)),
                           
-                          wellPanel("Your approximation of pi is:",
-                                verbatimTextOutput("pi"))) ,width = 3, offset = 1),
+                            wellPanel("Your approximation of pi is:",
+                                verbatimTextOutput("pi"))) , width = 3),
                        
      
-         column(wellPanel(plotOutput("plot", width = "775px", height = "775px"),width = 6 ))))
+         column(plotOutput("plot", width = "700px", height = "700px"), 
+                    width = 8)
+        )
+     )
 
 
 server <- function(input, output) {
