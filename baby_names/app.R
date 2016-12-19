@@ -14,7 +14,7 @@ names <- data.table(babynames)
 
 ui <- fluidPage( theme = shinytheme("flatly"),
     tabsetPanel(
-        tabPanel("Boy Names",
+        tabPanel("Boy Namez",
                  
                  sidebarLayout(
                      sidebarPanel( helpText("Pick up to five names below and explore their popularity as baby names over time:"),

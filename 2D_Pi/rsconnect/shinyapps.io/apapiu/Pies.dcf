@@ -1,9 +1,10 @@
 name: pies
+title: 2D_Pi
 account: apapiu
 server: shinyapps.io
 appId: 87954
-bundleId: 391815
+bundleId: 654352
 url: https://apapiu.shinyapps.io/Pies/
-when: 1457577902.69674
+when: 1482114165.23952
 asMultiple: FALSE
 asStatic: FALSE

@@ -1,0 +1,2 @@
+
+We will approximate Pi by generating random points in a square and then counting what fraction of those points are inside the circle contained in the square. You can think of this as randomly throwing darts at a square board. Since we know what the area of a square is we've replaced a calculus problem with a counting problem! Play around with the slider on the right - you should (on average) get a better approximation of Pi the more points you use.

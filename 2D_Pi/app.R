@@ -2,57 +2,49 @@ library(shiny)
 library(shinythemes)
 library(ggplot2)
 
+generate_points <- function(num){
+    #generate points in a square:
+    x <- replicate(2, runif(num ,min = -1, max = 1))
+    inside <- (apply(x, 1, function(x) {x[1]^2 +x[2]^2}))<=1
+    return(data.frame(x, inside))
+}
 
-ui <- fluidPage( theme = shinytheme("flatly"),
-        
+descp = readChar("description.txt", nchars = 1e6)
 
-     fluidRow( column (verticalLayout( 
-         
-                            wellPanel("We will aproximate Pi by generating random points
-                            in a square and then counting what fraction of those
-                            points are inside the circle contained in the square.
-                            You can think of this as randomly throwing darts at a square board.
-                            Since we know what the area of a square is we've 
-                            replaced a calculus problem with a counting problem! Play around with the slider on the
-                            right - you should get a better approximation of Pi the more points you use."),
-                                
+ui <- fluidPage(theme = shinytheme("flatly"),
+                
+                fluidRow(
+                    column(
+                        verticalLayout(
+                            
+                            wellPanel(descp),
+                            
                             wellPanel(sliderInput(inputId = "num",
-                                label = "Number of Points",
-                                value = 1000, min = 10, max = 30000)),
-                          
+                                                  label = "Number of Points",
+                                                  value = 1000, min = 10, max = 30000)),
+                            
                             wellPanel("Your approximation of pi is:",
-                                verbatimTextOutput("pi"))) , width = 3),
-                       
-     
-         column(plotOutput("plot", width = "700px", height = "700px"), 
-                    width = 8)
-        )
-     )
+                                      verbatimTextOutput("pi"))) , width = 3),
+                    
+                    
+                    column(
+                        plotOutput("plot", width = "800px", height = "800px"), width = 8)
+                )
+)
 
 
 server <- function(input, output) {
     
-    dat <- function(num){
-        x <- replicate(2, runif(num ,min = -1, max = 1))
-        inside <- (apply(x, 1, function(x) {x[1]^2 +x[2]^2}))<=1
-        data.frame(x, inside)
-    }
-    
-    rv <- reactive({dat(input$num)})
+    rv <- reactive({generate_points(input$num)})
     
     output$pi <- renderPrint({
-        
         4 *sum(rv()$inside)/input$num
     })
     
     output$plot <- renderPlot({
-        
-        qplot(rv()[,1], rv()[,2], data = rv(),color = inside, xlab = "x", ylab = "y") +
-                     #scale_colour_manual(values=c("#9999CC", "#66CC99")) + 
-                     scale_color_brewer(palette = "Set1") +
-                     theme_minimal() +
-                     theme(legend.position="none")  
+        plot(x = rv()$X1, y = rv()$X2, xlab = "x", ylab = "y",
+             col = as.factor(rv()$inside), pch=20)
     })
-    }
+}
 
 shinyApp(ui = ui, server = server)
