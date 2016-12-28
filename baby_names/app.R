@@ -10,8 +10,6 @@ library(DT)
 
 names <- data.table(babynames)
 
-
-
 ui <- fluidPage( theme = shinytheme("flatly"),
     tabsetPanel(
         tabPanel("Boy Namez",
